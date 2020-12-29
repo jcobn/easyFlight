@@ -7,7 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class EasyFlight extends JavaPlugin {
 
-    public static String version = "1.0";
+    public static String version = "1.1";
     public static Boolean isBeta = false;
 
     @Override
@@ -15,12 +15,16 @@ public final class EasyFlight extends JavaPlugin {
         getCommand("fly").setExecutor(new FlyCommand());
         getCommand("easyflight").setExecutor(new EasyFlightCommand());
 
-//Init config
+
+        //Init config
+
+        FlyUtils utils = new FlyUtils(this);
+
         getConfig().options().copyDefaults();
         saveDefaultConfig();
         getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "Easy Flight Enabled");
         getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "Version: " + version);
-        if (isBeta){getServer().getConsoleSender().sendMessage("§bEasyFlight: cWarning: Running a beta version, expect bugs!");}
+        if (isBeta){getServer().getConsoleSender().sendMessage("§bEasyFlight: §cWarning: Running a beta version, expect bugs!");}
     }
 
     @Override

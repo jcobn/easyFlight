@@ -1,5 +1,6 @@
 package me.kubajsa.easyflight;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 public class FlyUtils {
@@ -20,6 +21,6 @@ public class FlyUtils {
             player.setAllowFlight(false);
             player.setFlying(false);
         }
-        player.sendMessage("§bToggled flight for player §a" + player.getName());
+        player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("toggle-message")).replace("%player%", player.getName()));
     }
 }
