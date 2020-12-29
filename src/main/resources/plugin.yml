@@ -3,3 +3,10 @@ version: ${project.version}
 main: me.kubajsa.easyflight.EasyFlight
 api-version: 1.16
 authors: [ Kubajsa ]
+commands:
+  fly:
+    description: Enables flight
+  easyflight:
+    description: Plugin settings
+    aliases: [efly, eflight]
+    usage: /<command> [help|check]
