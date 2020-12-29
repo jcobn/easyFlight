@@ -1,0 +1,5 @@
+name: EasyFlight
+version: ${project.version}
+main: me.kubajsa.easyflight.EasyFlight
+api-version: 1.16
+authors: [ Kubajsa ]
