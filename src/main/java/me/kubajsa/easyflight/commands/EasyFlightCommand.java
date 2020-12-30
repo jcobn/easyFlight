@@ -1,6 +1,7 @@
 package me.kubajsa.easyflight.commands;
 
 import me.kubajsa.easyflight.EasyFlight;
+import me.kubajsa.easyflight.FlyUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -20,10 +21,16 @@ public class EasyFlightCommand implements CommandExecutor {
             }else if (args.length == 1 && args[0].equalsIgnoreCase("help")){
                 player.sendMessage("§9§l-------------------------");
                 player.sendMessage("§9Commands:");
-                player.sendMessage("§b/fly §9- §aToggle flight for yourself; §beasyflight.fly");
-                player.sendMessage("§b/fly <player> §9- §aToggle flight for others; §beasyflight.fly.others");
+                player.sendMessage("§b/fly §9- §aToggle flight for yourself");
+                player.sendMessage("§b/fly <player> §9- §aToggle flight for others");
                 player.sendMessage("§b/efly help §9- §aShows this message");
-                player.sendMessage("§b/efly check <player> §9- §aSee if someone's flying; §beasyflight.check");
+                player.sendMessage("§b/efly check <player> §9- §aSee if someone's flying");
+                player.sendMessage("§b/efly reload §9- §aReload the config");
+                player.sendMessage("§9Permissions:");
+                player.sendMessage("§beasyflight.fly - §a/fly");
+                player.sendMessage("§beasyflight.fly.others - §a/fly <player>");
+                player.sendMessage("§beasyflight.check - §a/efly check <player>");
+                player.sendMessage("§beasyflight.reload - §a/efly reload");
                 player.sendMessage("§9§l-------------------------");
             }else if (args[0].equalsIgnoreCase("check")){
                 if (player.hasPermission("easyflight.check")){
@@ -35,6 +42,12 @@ public class EasyFlightCommand implements CommandExecutor {
                         player.sendMessage("§cUsage: /efly check <player>");
                     }
                 }else {player.sendMessage("§cYou do not have permission to do that!");}
+            }else if (args[0].equalsIgnoreCase("reload")){
+                if (player.hasPermission("easyflight.reload")){
+                    FlyUtils.reload(player);
+                }else {player.sendMessage("§cYou do not have permission to do that!");}
+            }else{
+                player.sendMessage("§cUnknown command, try /efly help");
             }
         }
 

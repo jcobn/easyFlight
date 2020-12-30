@@ -23,4 +23,11 @@ public class FlyUtils {
         }
         player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("toggle-message")).replace("%player%", player.getName()));
     }
+
+    public static void reload(Player player){
+        player.sendMessage("§bReloading config...");
+        plugin.reloadConfig();
+        player.sendMessage(" ");
+        player.sendMessage("§bConfig reloaded!");
+    }
 }
