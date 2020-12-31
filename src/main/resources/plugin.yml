@@ -7,6 +7,6 @@ commands:
   fly:
     description: Enables flight
   easyflight:
-    description: Plugin settings
+    description: Main EasyFlight plugin command
     aliases: [efly, eflight]
-    usage: /<command> [help|check]
+    usage: /<command>
