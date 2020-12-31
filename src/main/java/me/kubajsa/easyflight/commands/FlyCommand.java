@@ -31,6 +31,8 @@ public class FlyCommand implements CommandExecutor {
                 }else {player.sendMessage("§cYou do not have permission to do that!");}
             }
 
+        }else{
+            System.out.println("Only players can execute this command.");
         }
 
         return true;

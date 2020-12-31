@@ -17,8 +17,9 @@ public class EasyFlightCommand implements CommandExecutor {
             if (args.length == 0){
                 player.sendMessage("§bRunning §aEasyFlight §bVersion: §a" + EasyFlight.version);
                 player.sendMessage("§bType §a/efly help §bfor help");
-                if (EasyFlight.isBeta){player.sendMessage("§bEasyFlight: §cWarning: Running a beta version, expect bugs!");}
+                if (EasyFlight.isBeta){player.sendMessage("§bEasyFlight: §cWarning: Running a beta version, expect bugs!");}//Warning message if isBeta is true
             }else if (args.length == 1 && args[0].equalsIgnoreCase("help")){
+                //Help message
                 player.sendMessage("§9§l-------------------------");
                 player.sendMessage("§9Commands:");
                 player.sendMessage("§b/fly §9- §aToggle flight for yourself");
@@ -32,15 +33,14 @@ public class EasyFlightCommand implements CommandExecutor {
                 player.sendMessage("§beasyflight.check - §a/efly check <player>");
                 player.sendMessage("§beasyflight.reload - §a/efly reload");
                 player.sendMessage("§9§l-------------------------");
+                //Help message
             }else if (args[0].equalsIgnoreCase("check")){
                 if (player.hasPermission("easyflight.check")){
 
-                    try {
-                        Player target = Bukkit.getPlayer(args[1]);
-                        player.sendMessage("§bIs §a" + target.getName() + " §bFlying? §a" + target.getAllowFlight());
-                    }catch (Exception e){
-                        player.sendMessage("§cUsage: /efly check <player>");
-                    }
+                    if(args.length >= 2) {
+                        FlyUtils.checkFly(args[1], player);
+                    }else{player.sendMessage("§cUsage: /efly check <player>");}
+
                 }else {player.sendMessage("§cYou do not have permission to do that!");}
             }else if (args[0].equalsIgnoreCase("reload")){
                 if (player.hasPermission("easyflight.reload")){
@@ -49,6 +49,8 @@ public class EasyFlightCommand implements CommandExecutor {
             }else{
                 player.sendMessage("§cUnknown command, try /efly help");
             }
+        }else{
+            System.out.println("Only players can execute this command.");
         }
 
 
