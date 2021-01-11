@@ -7,8 +7,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class EasyFlight extends JavaPlugin {
 
-    public static String version = "1.4";
-    public static Boolean isBeta = false;
+    public static String version = "1.5";
+    public static Boolean isBeta = true;
 
     @Override
     public void onEnable() {

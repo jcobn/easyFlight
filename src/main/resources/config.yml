@@ -1,2 +1,4 @@
 # Here you can set the flight toggle message, you can use colors with '&' and then the color code and use '%player%' as a placeholder for the player's name
 toggle-message: '&bToggled flight for player &a%player%'
+turn-on-message: '&bTurned &aon &bflight for player &a%player%'
+turn-off-message: '&bTurned &coff &bflight for player &a%player%'
