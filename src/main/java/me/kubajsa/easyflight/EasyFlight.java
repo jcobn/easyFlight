@@ -7,13 +7,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class EasyFlight extends JavaPlugin {
 
-    public static String version = "1.4";
+    public static String version = "1.5";
     public static Boolean isBeta = false;
 
     @Override
     public void onEnable() {
-        getCommand("fly").setExecutor(new FlyCommand());
-        getCommand("easyflight").setExecutor(new EasyFlightCommand());
+        getCommand("fly").setExecutor(new FlyCommand(this));
+        getCommand("easyflight").setExecutor(new EasyFlightCommand(this));
 
 
         //Init config

@@ -3,12 +3,21 @@ package me.kubajsa.easyflight.commands;
 import me.kubajsa.easyflight.EasyFlight;
 import me.kubajsa.easyflight.FlyUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class EasyFlightCommand implements CommandExecutor {
+
+    static EasyFlight plugin;
+
+    public EasyFlightCommand(EasyFlight plugin){
+        this.plugin = plugin;
+    }
+
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
@@ -44,13 +53,13 @@ public class EasyFlightCommand implements CommandExecutor {
                         FlyUtils.checkFly(args[1], player);
                     }else{player.sendMessage("§cUsage: /efly check <player>");}
 
-                }else {player.sendMessage("§cYou do not have permission to do that!");}
+                }else {player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("no-permission-message")));}
 
             }else if (args[0].equalsIgnoreCase("reload")){
 
                 if (player.hasPermission("easyflight.reload")){
                     FlyUtils.reload(player);
-                }else {player.sendMessage("§cYou do not have permission to do that!");}
+                }else {player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("no-permission-message")));}
 
             }else if(args[0].equalsIgnoreCase("everyone")){
                 if (player.hasPermission("easyflight.everyone")) {
@@ -60,13 +69,13 @@ public class EasyFlightCommand implements CommandExecutor {
                             if (args[1].equalsIgnoreCase("on")) {
                                 for (Player target : Bukkit.getOnlinePlayers()) {
                                     FlyUtils.turnOnFly(target);
-                                    player.sendMessage("§bTurned §aon §bflight for everyone for the server");
                                 }
+                                player.sendMessage("§bTurned §aon §bflight for everyone for the server");
                             } else if (args[1].equalsIgnoreCase("off")) {
                                 for (Player target : Bukkit.getOnlinePlayers()) {
                                     FlyUtils.turnOffFly(target);
-                                    player.sendMessage("§bTurned §coff §bflight for everyone for the server");
                                 }
+                                player.sendMessage("§bTurned §coff §bflight for everyone for the server");
                             }
                         } else {
                             player.sendMessage("§cUsage: /efly everyone on|off");
@@ -76,7 +85,7 @@ public class EasyFlightCommand implements CommandExecutor {
                         player.sendMessage("§cUsage: /efly everyone on|off");
                     }
 
-                }else{player.sendMessage("§cYou do not have permission to do that!");}
+                }else{player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("no-permission-message")));}
             }else{
                 player.sendMessage("§cUnknown command, try /efly help");
             }

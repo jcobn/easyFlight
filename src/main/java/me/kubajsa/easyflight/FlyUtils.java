@@ -28,15 +28,13 @@ public class FlyUtils {
     public static void turnOnFly(Player player){
         player.setAllowFlight(true);
         player.setFlying(true);
-        //TODO Add custom message to the config
-        player.sendMessage("§bTurned §aon §bflight for player §a" + player.getName());
+        player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("turn-on-message").replace("%player%", player.getName())));
     }
 
     public static void turnOffFly(Player player){
         player.setAllowFlight(false);
         player.setFlying(false);
-        //TODO Add custom message to the config
-        player.sendMessage("§bTurned §coff §bflight for player §a" + player.getName());
+        player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("turn-off-message").replace("%player%", player.getName())));
     }
 
     public static void reload(Player player) {
