@@ -1,4 +1,11 @@
-# Here you can set the flight toggle message, you can use colors with '&' and then the color code and use '%player%' as a placeholder for the player's name
-toggle-message: '&bToggled flight for player &a%player%'
+#Messages
+  #Placeholders
+    # %player% = Player's name
+    # &<color code> - Color codes
+toggle-message: '&bToggled flight for player &a%player%' #Message that players will receive when their flight was toggled
 turn-on-message: '&bTurned &aon &bflight for player &a%player%'
 turn-off-message: '&bTurned &coff &bflight for player &a%player%'
+
+no-permission-message: '&cYou do not have permission to do that!'
+
+#More custom messages will come soon ;)
