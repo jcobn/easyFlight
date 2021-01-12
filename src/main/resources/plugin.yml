@@ -5,8 +5,9 @@ api-version: 1.16
 authors: [ Kubajsa ]
 commands:
   fly:
-    description: Enables flight
+    description: Toggles flight
+    usage: /<command> [player]
   easyflight:
     description: Main EasyFlight plugin command
     aliases: [efly, eflight]
-    usage: /<command>
+    usage: /<command> [help|check|everyone|reload]
