@@ -1,4 +1,3 @@
 [![discord](https://discord.com/api/guilds/793888620079480843/embed.png)](https://discord.gg/M83rMvrG6H)
 # Easy Flight
-Spigot mc page : https://www.spigotmc.org/resources/easy-flight.87206/<br>
-As I don't release all versions of the plugin here for the newest versions of the plugin please visit the link above, thanks!
+Spigot mc page : https://www.spigotmc.org/resources/easy-flight.87206/
