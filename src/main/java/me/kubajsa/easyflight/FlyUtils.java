@@ -56,6 +56,5 @@ public class FlyUtils {
                 player.sendMessage(one.replace("true", "Yes").replace("false", "No"));
                 player.sendMessage(two.replace("true", "Yes").replace("false", "No"));
             }
-
-}
+    }
 }

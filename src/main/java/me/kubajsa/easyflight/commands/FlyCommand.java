@@ -7,7 +7,10 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
+
+import java.util.logging.Logger;
 
 public class FlyCommand implements CommandExecutor {
 
@@ -35,7 +38,7 @@ public class FlyCommand implements CommandExecutor {
                     try {
                         Player target = Bukkit.getPlayer(args[0]);
                         FlyUtils.toggleFly(target);
-                        player.sendMessage("§bYou have toggled flight for player §a" + target.getName());
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("toggle-message-sender")).replace("%player%", target.getName()));
                     }catch (Exception e){
                         player.sendMessage("§cUsage: /fly <player>");
                     }
@@ -44,7 +47,17 @@ public class FlyCommand implements CommandExecutor {
             }
 
         }else{
-            System.out.println("Only players can execute this command.");
+            if (args.length == 1){
+                Player target = Bukkit.getPlayer(args[0]);
+                if (target != null){
+                    FlyUtils.toggleFly(target);
+                    System.out.println("You have toggled flight for " + target.getName());
+                }else{
+                    System.out.println("Couldn't find that player");
+                }
+            }else{
+                System.out.println("Usage: fly <player>");
+            }
         }
 
         return true;

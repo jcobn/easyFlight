@@ -6,9 +6,11 @@ import me.kubajsa.easyflight.commands.FlyCommand;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import javax.rmi.CORBA.Util;
+
 public final class EasyFlight extends JavaPlugin {
 
-    public static String version = "1.6";
+    public static String version = "1.7";
     public static Boolean isBeta = false;
 
     @Override
