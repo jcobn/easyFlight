@@ -1,6 +1,6 @@
 #Messages
   #Placeholders
-    # %player% = Player's name
+    # %player% = Player's name (!!Only works in some messages!!)
     # &<color code> - Color codes
 
 #Message that players will receive when their flight was toggled
@@ -12,7 +12,14 @@ toggle-message-sender: '&bYou have toggled flight for &a%player%'
 #Message that players will receive when their flight was turned on
 turn-on-message: '&bTurned &aon &bflight for player &a%player%'
 
-#Message that players will receive when their flight was turned o
+#Message that players will receive when their flight was turned off
 turn-off-message: '&bTurned &coff &bflight for player &a%player%'
 
+#Message that players will receive when they execute a command that they don't have permission for
 no-permission-message: '&cYou do not have permission to do that!'
+
+#Message that players will receive when they turn on fly fro everyone
+turn-on-everyone-message: '&bTurned &aon &bflight for everyone for the server'
+
+#Message that players will receive when they turn off fly fro everyone
+turn-off-everyone-message: '&bTurned &coff &bflight for everyone for the server'

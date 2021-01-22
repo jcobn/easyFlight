@@ -1,12 +1,13 @@
 package me.kubajsa.easyflight.commands;
 
 import me.kubajsa.easyflight.EasyFlight;
-import me.kubajsa.easyflight.FlyUtils;
+import me.kubajsa.easyflight.utils.FlyUtils;
+import me.kubajsa.easyflight.utils.Utils;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
 public class EasyFlightCommand implements CommandExecutor {
@@ -53,13 +54,13 @@ public class EasyFlightCommand implements CommandExecutor {
                         FlyUtils.checkFly(args[1], player);
                     }else{player.sendMessage("§cUsage: /efly check <player>");}
 
-                }else {player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("no-permission-message")));}
+                }else {player.sendMessage(Utils.getNoPermissionMessage());}
 
             }else if (args[0].equalsIgnoreCase("reload")){
 
                 if (player.hasPermission("easyflight.reload")){
                     FlyUtils.reload(player);
-                }else {player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("no-permission-message")));}
+                }else {player.sendMessage(Utils.getNoPermissionMessage());}
 
             }else if(args[0].equalsIgnoreCase("everyone")){
                 if (player.hasPermission("easyflight.everyone")) {
@@ -70,12 +71,12 @@ public class EasyFlightCommand implements CommandExecutor {
                                 for (Player target : Bukkit.getOnlinePlayers()) {
                                     FlyUtils.turnOnFly(target);
                                 }
-                                player.sendMessage("§bTurned §aon §bflight for everyone for the server");
+                                player.sendMessage(Utils.getTurnOnEveryoneMessage());
                             } else if (args[1].equalsIgnoreCase("off")) {
                                 for (Player target : Bukkit.getOnlinePlayers()) {
                                     FlyUtils.turnOffFly(target);
                                 }
-                                player.sendMessage("§bTurned §coff §bflight for everyone for the server");
+                                player.sendMessage(Utils.getTurnOffEveryoneMessage());
                             }
                         } else {
                             player.sendMessage("§cUsage: /efly everyone on|off");
@@ -85,12 +86,41 @@ public class EasyFlightCommand implements CommandExecutor {
                         player.sendMessage("§cUsage: /efly everyone on|off");
                     }
 
-                }else{player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("no-permission-message")));}
+                }else{player.sendMessage(Utils.getNoPermissionMessage());}
             }else{
                 player.sendMessage("§cUnknown command, try /efly help");
             }
         }else{
-            System.out.println("Only players can execute this command.");
+            //CONSOLE sender
+            if(sender instanceof ConsoleCommandSender){
+                if (args.length != 0){
+
+                    if(args[0].equalsIgnoreCase("help")){
+                        System.out.println("-------------------------");
+                        System.out.println("Commands:");
+                        System.out.println("/fly - Toggle flight for yourself");
+                        System.out.println("/fly <player> - Toggle flight for others");
+                        System.out.println("/efly help - Shows this message");
+                        System.out.println("/efly check <player> - See if someone's flying");
+                        System.out.println("/efly reload - Reload the config");
+                        System.out.println("/efly everyone on|off - Turn on/off flight of everyone");
+                        System.out.println("Permissions:");
+                        System.out.println("easyflight.fly - /fly");
+                        System.out.println("easyflight.fly.others - /fly <player>");
+                        System.out.println("easyflight.check - /efly check <player>");
+                        System.out.println("easyflight.reload - /efly reload");
+                        System.out.println("easyflight.everyone - /efly everyone on|off");
+                        System.out.println("-------------------------");
+                    }else{
+                        System.out.println("This command either doesn't exist or it is only executable by a player");
+                    }
+
+                }else{
+                    System.out.println("Running EasyFlight Version: " + EasyFlight.version);
+                    System.out.println("Type /efly help for help");
+                    if (EasyFlight.isBeta){ System.out.println("Warn: Running a beta version, expect bugs!"); }
+                }
+            }
         }
 
 

@@ -1,5 +1,6 @@
-package me.kubajsa.easyflight;
+package me.kubajsa.easyflight.utils;
 
+import me.kubajsa.easyflight.EasyFlight;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -22,19 +23,19 @@ public class FlyUtils {
             player.setAllowFlight(false);
             player.setFlying(false);
         }
-        player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("toggle-message")).replace("%player%", player.getName()));
+        player.sendMessage(Utils.getToggleMessage(player));
     }
 
     public static void turnOnFly(Player player){
         player.setAllowFlight(true);
         player.setFlying(true);
-        player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("turn-on-message").replace("%player%", player.getName())));
+        player.sendMessage(Utils.getTurnOnMessage(player));
     }
 
     public static void turnOffFly(Player player){
         player.setAllowFlight(false);
         player.setFlying(false);
-        player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("turn-off-message").replace("%player%", player.getName())));
+        player.sendMessage(Utils.getTurnOffMessage(player));
     }
 
     public static void reload(Player player) {

@@ -3,14 +3,14 @@ package me.kubajsa.easyflight;
 import me.kubajsa.easyflight.commands.EasyFlightCommand;
 import me.kubajsa.easyflight.commands.EasyFlightCommandTabCompleter;
 import me.kubajsa.easyflight.commands.FlyCommand;
+import me.kubajsa.easyflight.utils.FlyUtils;
+import me.kubajsa.easyflight.utils.Utils;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import javax.rmi.CORBA.Util;
-
 public final class EasyFlight extends JavaPlugin {
 
-    public static String version = "1.7";
+    public static String version = "1.7.1";
     public static Boolean isBeta = false;
 
     @Override
@@ -23,6 +23,7 @@ public final class EasyFlight extends JavaPlugin {
         //Init config
 
         FlyUtils utils = new FlyUtils(this);
+        Utils utils1 = new Utils(this);
 
         getConfig().options().copyDefaults();
         saveDefaultConfig();

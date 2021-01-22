@@ -10,4 +10,4 @@ commands:
   easyflight:
     description: Main EasyFlight plugin command
     aliases: [efly, eflight]
-    usage: /<command> [help|check|everyone|reload]
+    usage: /<command> [help|check|everyone|reload] [on|off]

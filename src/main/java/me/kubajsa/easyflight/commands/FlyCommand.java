@@ -1,16 +1,14 @@
 package me.kubajsa.easyflight.commands;
 
 import me.kubajsa.easyflight.EasyFlight;
-import me.kubajsa.easyflight.FlyUtils;
+import me.kubajsa.easyflight.utils.FlyUtils;
+import me.kubajsa.easyflight.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
-
-import java.util.logging.Logger;
 
 public class FlyCommand implements CommandExecutor {
 
@@ -30,7 +28,7 @@ public class FlyCommand implements CommandExecutor {
                 if (player.hasPermission("easyflight.fly")){
                     FlyUtils.toggleFly(player);
                 }else {
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("no-permission-message")));
+                    player.sendMessage(Utils.getNoPermissionMessage());
                 }
             } if (args.length == 1){
                 if (player.hasPermission("easyflight.fly.others")){
@@ -38,12 +36,12 @@ public class FlyCommand implements CommandExecutor {
                     try {
                         Player target = Bukkit.getPlayer(args[0]);
                         FlyUtils.toggleFly(target);
-                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("toggle-message-sender")).replace("%player%", target.getName()));
+                        player.sendMessage(Utils.getToggleMessageSender(target));
                     }catch (Exception e){
                         player.sendMessage("§cUsage: /fly <player>");
                     }
 
-                }else {player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("no-permission-message")));}
+                }else {player.sendMessage(Utils.getNoPermissionMessage());}
             }
 
         }else{
