@@ -10,7 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class EasyFlight extends JavaPlugin {
 
-    public static String version = "1.7.1";
+    public static String version = "1.7.2";
     public static Boolean isBeta = false;
 
     @Override
@@ -19,6 +19,7 @@ public final class EasyFlight extends JavaPlugin {
         getCommand("easyflight").setExecutor(new EasyFlightCommand(this));
         getCommand("easyflight").setTabCompleter(new EasyFlightCommandTabCompleter());
 
+        MetricsLite metricsLite = new MetricsLite(this, 10112);
 
         //Init config
 
