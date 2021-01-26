@@ -25,7 +25,6 @@ public final class EasyFlight extends JavaPlugin {
 
         FlyUtils utils = new FlyUtils(this);
         Utils utils1 = new Utils(this);
-
         getConfig().options().copyDefaults();
         saveDefaultConfig();
         getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "Easy Flight Enabled");
