@@ -86,7 +86,7 @@ public class MetricsLite {
     /**
      * Class constructor.
      *
-     * @param plugin The plugin which stats should be submitted.
+     * @param plugin   The plugin which stats should be submitted.
      * @param pluginId The id of the plugin.
      *                 It can be found at <a href="https://bstats.org/what-is-my-plugin-id">What is my plugin id?</a>
      */
@@ -125,7 +125,8 @@ public class MetricsLite {
             ).copyDefaults(true);
             try {
                 config.save(configFile);
-            } catch (IOException ignored) { }
+            } catch (IOException ignored) {
+            }
         }
 
         // Load the data
@@ -142,7 +143,8 @@ public class MetricsLite {
                     service.getField("B_STATS_VERSION"); // Our identifier :)
                     found = true; // We aren't the first
                     break;
-                } catch (NoSuchFieldException ignored) { }
+                } catch (NoSuchFieldException ignored) {
+                }
             }
             // Register our service
             Bukkit.getServicesManager().register(MetricsLite.class, this, plugin, ServicePriority.Normal);
@@ -290,7 +292,8 @@ public class MetricsLite {
                     } catch (NullPointerException | NoSuchMethodException | IllegalAccessException | InvocationTargetException ignored) {
                     }
                 }
-            } catch (NoSuchFieldException ignored) { }
+            } catch (NoSuchFieldException ignored) {
+            }
         }
 
         data.add("plugins", pluginData);
@@ -313,7 +316,7 @@ public class MetricsLite {
      * Sends the data to the bStats server.
      *
      * @param plugin Any plugin. It's just used to get a logger instance.
-     * @param data The data to send.
+     * @param data   The data to send.
      * @throws Exception If the request failed.
      */
     private static void sendData(Plugin plugin, JsonObject data) throws Exception {
@@ -371,7 +374,7 @@ public class MetricsLite {
             return null;
         }
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        try(GZIPOutputStream gzip = new GZIPOutputStream(outputStream)) {
+        try (GZIPOutputStream gzip = new GZIPOutputStream(outputStream)) {
             gzip.write(str.getBytes(StandardCharsets.UTF_8));
         }
         return outputStream.toByteArray();

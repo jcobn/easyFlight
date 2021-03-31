@@ -23,3 +23,9 @@ turn-on-everyone-message: '&bTurned &aon &bflight for everyone for the server'
 
 #Message that players will receive when they turn off fly fro everyone
 turn-off-everyone-message: '&bTurned &coff &bflight for everyone for the server'
+
+turn-on-temp-message: "&bTurned &aon &bflight for player &a%player% §bfor &a%time%"
+
+flight-ends-in-thirty-sec: "&cYour flight ends in 30 seconds!"
+
+flight-ends-in: "&cYour flight ends in %amount% seconds!!!"
