@@ -2,6 +2,7 @@ package me.kubajsa.easyflight.commands;
 
 import me.kubajsa.easyflight.EasyFlight;
 import me.kubajsa.easyflight.utils.FlyUtils;
+import me.kubajsa.easyflight.utils.Log;
 import me.kubajsa.easyflight.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -103,28 +104,28 @@ public class EasyFlightCommand implements CommandExecutor {
                 if (args.length != 0) {
 
                     if (args[0].equalsIgnoreCase("help")) {
-                        System.out.println("-------------------------");
-                        System.out.println("Commands:");
-                        System.out.println("/fly - Toggle flight for yourself");
-                        System.out.println("/fly <player> - Toggle flight for others");
-                        System.out.println("/efly help - Shows this message");
-                        System.out.println("/efly check <player> - See if someone's flying");
-                        System.out.println("/efly reload - Reload the config");
-                        System.out.println("/efly everyone on|off - Turn on/off flight of everyone");
-                        System.out.println("Permissions:");
-                        System.out.println("easyflight.fly - /fly");
-                        System.out.println("easyflight.fly.others - /fly <player>");
-                        System.out.println("easyflight.check - /efly check <player>");
-                        System.out.println("easyflight.reload - /efly reload");
-                        System.out.println("easyflight.everyone - /efly everyone on|off");
-                        System.out.println("-------------------------");
+                        Log.log(Log.LogLevel.DEFAULT, "-------------------------");
+                        Log.log(Log.LogLevel.DEFAULT, "Commands:");
+                        Log.log(Log.LogLevel.DEFAULT, "/fly - Toggle flight for yourself");
+                        Log.log(Log.LogLevel.DEFAULT, "/fly <player> - Toggle flight for others");
+                        Log.log(Log.LogLevel.DEFAULT, "/efly help - Shows this message");
+                        Log.log(Log.LogLevel.DEFAULT, "/efly check <player> - See if someone's flying");
+                        Log.log(Log.LogLevel.DEFAULT, "/efly reload - Reload the config");
+                        Log.log(Log.LogLevel.DEFAULT, "/efly everyone on|off - Turn on/off flight of everyone");
+                        Log.log(Log.LogLevel.DEFAULT, "Permissions:");
+                        Log.log(Log.LogLevel.DEFAULT, "easyflight.fly - /fly");
+                        Log.log(Log.LogLevel.DEFAULT, "easyflight.fly.others - /fly <player>");
+                        Log.log(Log.LogLevel.DEFAULT, "easyflight.check - /efly check <player>");
+                        Log.log(Log.LogLevel.DEFAULT, "easyflight.reload - /efly reload");
+                        Log.log(Log.LogLevel.DEFAULT, "easyflight.everyone - /efly everyone on|off");
+                        Log.log(Log.LogLevel.DEFAULT, "-------------------------");
                     } else {
                         System.out.println("This command either doesn't exist or it is only executable by a player");
                     }
 
                 } else {
-                    System.out.println("Running EasyFlight Version: " + EasyFlight.VERSION);
-                    System.out.println("Type /efly help for help");
+                    Log.log(Log.LogLevel.DEFAULT, "Running EasyFlight Version: " + EasyFlight.VERSION);
+                    Log.log(Log.LogLevel.DEFAULT, "Type /efly help for help");
                 }
             }
         }

@@ -2,9 +2,9 @@ package me.kubajsa.easyflight.commands;
 
 import me.kubajsa.easyflight.EasyFlight;
 import me.kubajsa.easyflight.utils.FlyUtils;
+import me.kubajsa.easyflight.utils.Log;
 import me.kubajsa.easyflight.utils.Utils;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -52,12 +52,12 @@ public class FlyCommand implements CommandExecutor {
                 Player target = Bukkit.getPlayer(args[0]);
                 if (target != null) {
                     FlyUtils.toggleFly(target);
-                    System.out.println("You have toggled flight for " + target.getName());
+                    Log.log(Log.LogLevel.SUCCESS, "You have toggled flight for " + target.getName());
                 } else {
-                    System.out.println("Couldn't find that player");
+                    Log.log(Log.LogLevel.ERROR, "Couldn't find that player");
                 }
             } else {
-                System.out.println("Usage: fly <player>");
+                Log.log(Log.LogLevel.ERROR, "Usage: fly <player>");
             }
         }
 

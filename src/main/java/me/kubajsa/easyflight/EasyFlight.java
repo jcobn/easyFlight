@@ -4,8 +4,8 @@ import me.kubajsa.easyflight.commands.EasyFlightCommand;
 import me.kubajsa.easyflight.commands.EasyFlightCommandTabCompleter;
 import me.kubajsa.easyflight.commands.FlyCommand;
 import me.kubajsa.easyflight.utils.FlyUtils;
+import me.kubajsa.easyflight.utils.Log;
 import me.kubajsa.easyflight.utils.Utils;
-import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class EasyFlight extends JavaPlugin {
@@ -25,14 +25,14 @@ public final class EasyFlight extends JavaPlugin {
         Utils utils1 = new Utils(this);
         getConfig().options().copyDefaults();
         saveDefaultConfig();
-        getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "Easy Flight Enabled");
-        getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "Version: " + VERSION);
+        Log.log(Log.LogLevel.INFO, "Enabling EasyFlight v" + VERSION);
+        Log.log(Log.LogLevel.INFO, "Author: Kubajsa");
+        Log.log(Log.LogLevel.INFO, "Use /efly help for more info");
+        Log.log(Log.LogLevel.SUCCESS, "Finished loading EasyFlight");
     }
 
     @Override
     public void onDisable() {
         // Plugin shutdown logic
-        getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "Easy Flight Disabled");
-        getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "Version: " + VERSION);
     }
 }
