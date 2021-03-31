@@ -12,10 +12,10 @@ public class EasyFlightCommandTabCompleter implements TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
 
-        if (sender instanceof Player){
+        if (sender instanceof Player) {
             Player p = (Player) sender;
-            if (args.length == 1){
-                List<String> strings= new ArrayList<>();
+            if (args.length == 1) {
+                List<String> strings = new ArrayList<>();
 
                 strings.add("help");
                 strings.add("check");
@@ -23,8 +23,8 @@ public class EasyFlightCommandTabCompleter implements TabCompleter {
                 strings.add("everyone");
 
                 return strings;
-            }else if (args.length == 2 & args[0].equalsIgnoreCase("everyone")){
-                List<String> strings2= new ArrayList<>();
+            } else if (args.length == 2 & args[0].equalsIgnoreCase("everyone")) {
+                List<String> strings2 = new ArrayList<>();
 
                 strings2.add("on");
                 strings2.add("off");

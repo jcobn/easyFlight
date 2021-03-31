@@ -22,38 +22,41 @@ public class FlyCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        if (sender instanceof Player){
+        if (sender instanceof Player) {
             Player player = (Player) sender;
-            if (args.length == 0){
-                if (player.hasPermission("easyflight.fly")){
+            if (args.length == 0) {
+                if (player.hasPermission("easyflight.fly")) {
                     FlyUtils.toggleFly(player);
-                }else {
+                } else {
                     player.sendMessage(Utils.getNoPermissionMessage());
                 }
-            } if (args.length == 1){
-                if (player.hasPermission("easyflight.fly.others")){
+            }
+            if (args.length == 1) {
+                if (player.hasPermission("easyflight.fly.others")) {
 
                     try {
                         Player target = Bukkit.getPlayer(args[0]);
                         FlyUtils.toggleFly(target);
                         player.sendMessage(Utils.getToggleMessageSender(target));
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         player.sendMessage("§cUsage: /fly <player>");
                     }
 
-                }else {player.sendMessage(Utils.getNoPermissionMessage());}
+                } else {
+                    player.sendMessage(Utils.getNoPermissionMessage());
+                }
             }
 
-        }else{
-            if (args.length == 1){
+        } else {
+            if (args.length == 1) {
                 Player target = Bukkit.getPlayer(args[0]);
-                if (target != null){
+                if (target != null) {
                     FlyUtils.toggleFly(target);
                     System.out.println("You have toggled flight for " + target.getName());
-                }else{
+                } else {
                     System.out.println("Couldn't find that player");
                 }
-            }else{
+            } else {
                 System.out.println("Usage: fly <player>");
             }
         }

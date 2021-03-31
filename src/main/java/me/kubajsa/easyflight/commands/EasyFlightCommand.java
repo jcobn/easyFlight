@@ -14,7 +14,7 @@ public class EasyFlightCommand implements CommandExecutor {
 
     static EasyFlight plugin;
 
-    public EasyFlightCommand(EasyFlight plugin){
+    public EasyFlightCommand(EasyFlight plugin) {
         this.plugin = plugin;
     }
 
@@ -22,13 +22,15 @@ public class EasyFlightCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        if (sender instanceof Player){
+        if (sender instanceof Player) {
             Player player = (Player) sender;
-            if (args.length == 0){
+            if (args.length == 0) {
                 player.sendMessage("§bRunning §aEasyFlight §bVersion: §a" + EasyFlight.version);
                 player.sendMessage("§bType §a/efly help §bfor help");
-                if (EasyFlight.isBeta){player.sendMessage("§bEasyFlight: §cWarning: Running a beta version, expect bugs!");}//Warning message if isBeta is true
-            }else if (args[0].equalsIgnoreCase("help")){
+                if (EasyFlight.isBeta) {
+                    player.sendMessage("§bEasyFlight: §cWarning: Running a beta version, expect bugs!");
+                }//Warning message if isBeta is true
+            } else if (args[0].equalsIgnoreCase("help")) {
                 //Help message
                 player.sendMessage("§9§l-------------------------");
                 player.sendMessage("§9Commands:");
@@ -46,23 +48,29 @@ public class EasyFlightCommand implements CommandExecutor {
                 player.sendMessage("§beasyflight.everyone - §a/efly everyone on|off");
                 player.sendMessage("§9§l-------------------------");
                 //Help message
-            }else if (args[0].equalsIgnoreCase("check")){
+            } else if (args[0].equalsIgnoreCase("check")) {
 
-                if (player.hasPermission("easyflight.check")){
+                if (player.hasPermission("easyflight.check")) {
 
-                    if(args.length >= 2) {
+                    if (args.length >= 2) {
                         FlyUtils.checkFly(args[1], player);
-                    }else{player.sendMessage("§cUsage: /efly check <player>");}
+                    } else {
+                        player.sendMessage("§cUsage: /efly check <player>");
+                    }
 
-                }else {player.sendMessage(Utils.getNoPermissionMessage());}
+                } else {
+                    player.sendMessage(Utils.getNoPermissionMessage());
+                }
 
-            }else if (args[0].equalsIgnoreCase("reload")){
+            } else if (args[0].equalsIgnoreCase("reload")) {
 
-                if (player.hasPermission("easyflight.reload")){
+                if (player.hasPermission("easyflight.reload")) {
                     FlyUtils.reload(player);
-                }else {player.sendMessage(Utils.getNoPermissionMessage());}
+                } else {
+                    player.sendMessage(Utils.getNoPermissionMessage());
+                }
 
-            }else if(args[0].equalsIgnoreCase("everyone")){
+            } else if (args[0].equalsIgnoreCase("everyone")) {
                 if (player.hasPermission("easyflight.everyone")) {
 
                     if (args.length == 2) {
@@ -86,16 +94,18 @@ public class EasyFlightCommand implements CommandExecutor {
                         player.sendMessage("§cUsage: /efly everyone on|off");
                     }
 
-                }else{player.sendMessage(Utils.getNoPermissionMessage());}
-            }else{
+                } else {
+                    player.sendMessage(Utils.getNoPermissionMessage());
+                }
+            } else {
                 player.sendMessage("§cUnknown command, try /efly help");
             }
-        }else{
+        } else {
             //CONSOLE sender
-            if(sender instanceof ConsoleCommandSender){
-                if (args.length != 0){
+            if (sender instanceof ConsoleCommandSender) {
+                if (args.length != 0) {
 
-                    if(args[0].equalsIgnoreCase("help")){
+                    if (args[0].equalsIgnoreCase("help")) {
                         System.out.println("-------------------------");
                         System.out.println("Commands:");
                         System.out.println("/fly - Toggle flight for yourself");
@@ -111,14 +121,16 @@ public class EasyFlightCommand implements CommandExecutor {
                         System.out.println("easyflight.reload - /efly reload");
                         System.out.println("easyflight.everyone - /efly everyone on|off");
                         System.out.println("-------------------------");
-                    }else{
+                    } else {
                         System.out.println("This command either doesn't exist or it is only executable by a player");
                     }
 
-                }else{
+                } else {
                     System.out.println("Running EasyFlight Version: " + EasyFlight.version);
                     System.out.println("Type /efly help for help");
-                    if (EasyFlight.isBeta){ System.out.println("Warn: Running a beta version, expect bugs!"); }
+                    if (EasyFlight.isBeta) {
+                        System.out.println("Warn: Running a beta version, expect bugs!");
+                    }
                 }
             }
         }

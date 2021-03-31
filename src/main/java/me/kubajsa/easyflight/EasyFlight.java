@@ -28,7 +28,9 @@ public final class EasyFlight extends JavaPlugin {
         saveDefaultConfig();
         getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "Easy Flight Enabled");
         getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "Version: " + version);
-        if (isBeta){getServer().getConsoleSender().sendMessage("§bEasyFlight: §cWarning: Running a beta version, expect bugs!");} //Warning message if isBeta is true
+        if (isBeta) {
+            getServer().getConsoleSender().sendMessage("§bEasyFlight: §cWarning: Running a beta version, expect bugs!");
+        } //Warning message if isBeta is true
     }
 
     @Override
