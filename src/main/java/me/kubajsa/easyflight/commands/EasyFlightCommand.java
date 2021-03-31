@@ -3,6 +3,7 @@ package me.kubajsa.easyflight.commands;
 import me.kubajsa.easyflight.EasyFlight;
 import me.kubajsa.easyflight.utils.FlyUtils;
 import me.kubajsa.easyflight.utils.Log;
+import me.kubajsa.easyflight.utils.TempFlyUtils;
 import me.kubajsa.easyflight.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -71,12 +72,30 @@ public class EasyFlightCommand implements CommandExecutor {
             } else if (args[0].equalsIgnoreCase("everyone")) {
                 if (player.hasPermission("easyflight.everyone")) {
 
-                    if (args.length == 2) {
+                    if (args.length == 2 || args.length == 3) {
                         if (args[1].equalsIgnoreCase("on") || args[1].equalsIgnoreCase("off")) {
                             if (args[1].equalsIgnoreCase("on")) {
-                                for (Player target : Bukkit.getOnlinePlayers()) {
-                                    FlyUtils.turnOnFly(target);
+                                if (args.length == 3) {
+                                    String timeString = args[2];
+                                    if (timeString.matches("\\d+([smhd]|seconds?|minutes?|hours?|days?)")) {
+                                        long duration = Utils.calculateDuration(timeString);
+                                        player.sendMessage(Utils.getTurnOnEveryoneMessage());
+                                        for (Player target : Bukkit.getOnlinePlayers()) {
+                                            TempFlyUtils tempFlyUtils = new TempFlyUtils(plugin);
+                                            tempFlyUtils.addTempFly(target, duration);
+                                        }
+
+                                    } else {
+                                        player.sendMessage("§cTime format: <amount><s|m|h|d>");
+                                        player.sendMessage("§cExample: 40m (Forty minutes)");
+                                    }
+                                } else {
+                                    for (Player target : Bukkit.getOnlinePlayers()) {
+                                        FlyUtils.turnOnFly(target);
+                                    }
+                                    player.sendMessage(Utils.getTurnOnEveryoneMessage());
                                 }
+
                                 player.sendMessage(Utils.getTurnOnEveryoneMessage());
                             } else if (args[1].equalsIgnoreCase("off")) {
                                 for (Player target : Bukkit.getOnlinePlayers()) {
@@ -85,11 +104,11 @@ public class EasyFlightCommand implements CommandExecutor {
                                 player.sendMessage(Utils.getTurnOffEveryoneMessage());
                             }
                         } else {
-                            player.sendMessage("§cUsage: /efly everyone on|off");
+                            player.sendMessage("§cUsage: /efly everyone on|off [time]");
                         }
 
                     } else {
-                        player.sendMessage("§cUsage: /efly everyone on|off");
+                        player.sendMessage("§cUsage: /efly everyone on|off [time]");
                     }
 
                 } else {

@@ -21,36 +21,15 @@ public class TempFlyUtils {
         target.setFlying(true);
         task = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
             count++;
-            if (count == duration - 30){
+            if (count == duration - 30) {
                 target.sendMessage(Utils.getFlightEndsInThirtyMessage());
             }
-            if (count >= duration - 10){
+            if (count >= duration - 10) {
                 target.sendMessage(Utils.getFlightEndsInMessage((int) (duration - count)));
             }
-            if (count == duration){
+            if (count == duration) {
                 target.setFlying(false);
                 target.setAllowFlight(false);
-                count = 0;
-                Bukkit.getScheduler().cancelTask(task);
-            }
-        }, 0, 20);
-    }
-
-    public void addTempFly(Player target, long duration, boolean toggle) {
-
-        target.setAllowFlight(toggle);
-        target.setFlying(toggle);
-        task = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
-            count++;
-            if (count == duration - 30){
-                target.sendMessage(Utils.getFlightEndsInThirtyMessage());
-            }
-            if (count >= duration - 10){
-                target.sendMessage(Utils.getFlightEndsInMessage((int) (duration - count)));
-            }
-            if (count == duration){
-                target.setFlying(!toggle);
-                target.setAllowFlight(!toggle);
                 count = 0;
                 Bukkit.getScheduler().cancelTask(task);
             }
