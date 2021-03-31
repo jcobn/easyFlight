@@ -25,11 +25,8 @@ public class EasyFlightCommand implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (args.length == 0) {
-                player.sendMessage("§bRunning §aEasyFlight §bVersion: §a" + EasyFlight.version);
+                player.sendMessage("§bRunning §aEasyFlight §bVersion: §a" + EasyFlight.VERSION);
                 player.sendMessage("§bType §a/efly help §bfor help");
-                if (EasyFlight.isBeta) {
-                    player.sendMessage("§bEasyFlight: §cWarning: Running a beta version, expect bugs!");
-                }//Warning message if isBeta is true
             } else if (args[0].equalsIgnoreCase("help")) {
                 //Help message
                 player.sendMessage("§9§l-------------------------");
@@ -126,11 +123,8 @@ public class EasyFlightCommand implements CommandExecutor {
                     }
 
                 } else {
-                    System.out.println("Running EasyFlight Version: " + EasyFlight.version);
+                    System.out.println("Running EasyFlight Version: " + EasyFlight.VERSION);
                     System.out.println("Type /efly help for help");
-                    if (EasyFlight.isBeta) {
-                        System.out.println("Warn: Running a beta version, expect bugs!");
-                    }
                 }
             }
         }
