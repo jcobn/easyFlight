@@ -79,7 +79,6 @@ public class EasyFlightCommand implements CommandExecutor {
                                     String timeString = args[2];
                                     if (timeString.matches("\\d+([smhd]|seconds?|minutes?|hours?|days?)")) {
                                         long duration = Utils.calculateDuration(timeString);
-                                        player.sendMessage(Utils.getTurnOnEveryoneMessage());
                                         for (Player target : Bukkit.getOnlinePlayers()) {
                                             TempFlyUtils tempFlyUtils = new TempFlyUtils(plugin);
                                             tempFlyUtils.addTempFly(target, duration);
@@ -88,6 +87,7 @@ public class EasyFlightCommand implements CommandExecutor {
                                     } else {
                                         player.sendMessage("§cTime format: <amount><s|m|h|d>");
                                         player.sendMessage("§cExample: 40m (Forty minutes)");
+                                        return true;
                                     }
                                 } else {
                                     for (Player target : Bukkit.getOnlinePlayers()) {

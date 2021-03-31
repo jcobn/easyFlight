@@ -14,8 +14,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
-import java.time.temporal.TemporalAccessor;
-
 public class FlyCommand implements CommandExecutor {
 
     static EasyFlight plugin;
