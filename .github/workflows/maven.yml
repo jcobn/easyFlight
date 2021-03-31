@@ -23,6 +23,6 @@ jobs:
         uses: actions/upload-artifact@v2.2.2
         with:
           # Artifact name
-          name: RandomTP
+          name: EasyFlight
           # A file, directory or wildcard pattern that describes what to upload
           path: target/*.jar
