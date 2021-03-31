@@ -68,7 +68,7 @@ public class EasyFlightCommand implements CommandExecutor {
                     player.sendMessage(Utils.getNoPermissionMessage());
                 }
 
-            } else if (args[0].equalsIgnoreCase("everyone")) {//TODO Time
+            } else if (args[0].equalsIgnoreCase("everyone")) {
                 if (player.hasPermission("easyflight.everyone")) {
 
                     if (args.length == 2) {

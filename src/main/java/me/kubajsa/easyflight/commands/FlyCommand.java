@@ -1,6 +1,8 @@
 package me.kubajsa.easyflight.commands;
 
 import me.kubajsa.easyflight.EasyFlight;
+import me.kubajsa.easyflight.commands.subcommands.fly.FlyCommandOther;
+import me.kubajsa.easyflight.commands.subcommands.fly.FlyCommandTemp;
 import me.kubajsa.easyflight.utils.FlyUtils;
 import me.kubajsa.easyflight.utils.Log;
 import me.kubajsa.easyflight.utils.TempFlyUtils;
@@ -22,6 +24,8 @@ public class FlyCommand implements CommandExecutor {
         this.plugin = plugin;
     }
 
+    FlyCommandOther flyCommandOther = new FlyCommandOther();
+    FlyCommandTemp flyCommandTemp = new FlyCommandTemp(plugin);
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -36,40 +40,10 @@ public class FlyCommand implements CommandExecutor {
                 }
             }
             if (args.length == 1) {
-                if (player.hasPermission("easyflight.fly.others")) {
+                if (flyCommandOther.otherSubCommand(sender, command, label, args)) return true;
 
-                    try {
-                        Player target = Bukkit.getPlayer(args[0]);
-                        FlyUtils.toggleFly(target);
-                        player.sendMessage(Utils.getToggleMessageSender(target));
-                    } catch (Exception e) {
-                        player.sendMessage("§cUsage: /fly <player> [time]");
-                    }
-
-                } else {
-                    player.sendMessage(Utils.getNoPermissionMessage());
-                }
             } else if (args.length == 2) {
-                if (player.hasPermission("easyflight.fly.others")) {
-                    Player target = Bukkit.getPlayer(args[0]);
-                    if (target == null) {
-                        player.sendMessage("§cUsage: /fly <player> [time]");
-                        return true;
-                    }
-                    String timeString = args[1];
-                    if (timeString.matches("\\d+([smhd]|seconds?|minutes?|hours?|days?)")) {
-                        long duration = Utils.calculateDuration(timeString);
-                        FlyUtils.turnOnFly(target);
-                        player.sendMessage("§bTurned on flight for " + target.getName() + " for " + timeString);
-                        TempFlyUtils tempFlyUtils = new TempFlyUtils(plugin);
-                        tempFlyUtils.addTempFly(target, duration);
-                    } else {
-                        player.sendMessage("§cTime format: <amount><s|m|h|d>");
-                        player.sendMessage("§cExample: 40m (Forty minutes)");
-                    }
-                } else {
-                    player.sendMessage(Utils.getNoPermissionMessage());
-                }
+                if (flyCommandTemp.timeSubCommand(sender, command, label, args)) return true;
             }
 
         } else if (sender instanceof ConsoleCommandSender) {
@@ -81,11 +55,29 @@ public class FlyCommand implements CommandExecutor {
                 } else {
                     Log.log(Log.LogLevel.ERROR, "Couldn't find that player");
                 }
-            } else {
-                Log.log(Log.LogLevel.ERROR, "Usage: fly <player> [time]");//TODO Time
-            }
-        }
+            } else if (args.length == 2) {
+                Player target = Bukkit.getPlayer(args[0]);
+                if (target == null) {
+                    Log.log(Log.LogLevel.ERROR, "Couldn't find that player");
+                    return true;
+                }
+                String timeString = args[1];
+                if (timeString.matches("\\d+([smhd]|seconds?|minutes?|hours?|days?)")) {
+                    long duration = Utils.calculateDuration(timeString);
+                    FlyUtils.turnOnFly(target);
+                    Log.log(Log.LogLevel.SUCCESS, Utils.getTurnOnTempMessage(target, timeString));
+                    TempFlyUtils tempFlyUtils = new TempFlyUtils(plugin);
+                    tempFlyUtils.addTempFly(target, duration);
+                } else {
+                    Log.log(Log.LogLevel.INFO, "§cTime format: <amount><s|m|h|d>");
+                    Log.log(Log.LogLevel.INFO, "§cExample: 40m (Forty minutes)");
+                }
 
+            }
+        } else {
+            Log.log(Log.LogLevel.ERROR, "Usage: fly <player> [time]");
+        }
         return true;
     }
 }
+

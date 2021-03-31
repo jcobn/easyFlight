@@ -40,6 +40,17 @@ public class Utils {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("turn-off-everyone-message"));
     }
 
+    public static String getTurnOnTempMessage(Player target, String time) {
+        return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("turn-on-temp-message").replace("%player%", target.getName()).replace("%time%", time));
+    }
+
+    public static String getFlightEndsInThirtyMessage() {
+        return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("flight-ends-in-thirty-sec"));
+    }
+
+    public static String getFlightEndsInMessage(int amount){
+        return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("flight-ends-in").replace("%amount%", String.valueOf(amount)));
+    }
 
 
     public static long calculateDuration(String durationStr) { //In seconds
