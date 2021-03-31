@@ -20,7 +20,6 @@ public final class EasyFlight extends JavaPlugin {
         getCommand("easyflight").setTabCompleter(new EasyFlightCommandTabCompleter());
 
         MetricsLite metricsLite = new MetricsLite(this, 10112);
-
         //Init config
 
         FlyUtils utils = new FlyUtils(this);
