@@ -39,4 +39,37 @@ public class Utils {
     public static String getTurnOffEveryoneMessage() {
         return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("turn-off-everyone-message"));
     }
+
+
+
+    public static long calculateDuration(String durationStr) { //In seconds
+        char unit = findUnit(durationStr);
+        int unitIndex = durationStr.indexOf(unit);
+        long duration = Long.parseLong(durationStr.substring(0, unitIndex == -1 ? durationStr.length() : unitIndex));
+
+        switch (unit) {
+            case 'm':
+                duration *= 60;
+                break;
+            case 'h':
+                duration *= 3600;
+                break;
+            case 'd':
+                duration *= 86400;
+                break;
+            default:
+                break;
+        }
+
+        return duration;
+    }
+
+    private static char findUnit(String input) {
+        for (int i = 0; i < input.length(); i++) {
+            if (input.substring(i, i + 1).matches("[smhd]")) {
+                return input.charAt(i);
+            }
+        }
+        return 's';
+    }
 }

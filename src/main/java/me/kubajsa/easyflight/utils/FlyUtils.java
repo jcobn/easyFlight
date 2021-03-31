@@ -2,7 +2,6 @@ package me.kubajsa.easyflight.utils;
 
 import me.kubajsa.easyflight.EasyFlight;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 public class FlyUtils {
