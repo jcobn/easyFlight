@@ -27,6 +27,7 @@ public class EasyFlightCommand implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (args.length == 0) {
+
                 player.sendMessage("§bRunning §aEasyFlight §bVersion: §a" + EasyFlight.VERSION);
                 player.sendMessage("§bType §a/efly help §bfor help");
             } else if (args[0].equalsIgnoreCase("help")) {
@@ -52,7 +53,7 @@ public class EasyFlightCommand implements CommandExecutor {
                 if (player.hasPermission("easyflight.check")) {
 
                     if (args.length >= 2) {
-                        FlyUtils.checkFly(args[1], player);
+                        FlyUtils.checkFly(args[1], sender);
                     } else {
                         player.sendMessage("§cUsage: /efly check <player>");
                     }
@@ -137,6 +138,51 @@ public class EasyFlightCommand implements CommandExecutor {
                     Log.log(Log.LogLevel.DEFAULT, "easyflight.reload - /efly reload");
                     Log.log(Log.LogLevel.DEFAULT, "easyflight.everyone - /efly everyone on|off");
                     Log.log(Log.LogLevel.DEFAULT, "-------------------------");
+                } else if (args[0].equalsIgnoreCase("reload")) {
+                        FlyUtils.reload(sender);
+                    } else if (args[0].equalsIgnoreCase("check")) {
+                        if (args.length >= 2) {
+                            FlyUtils.checkFly(args[1], sender);
+                        } else {
+                            sender.sendMessage("§cUsage: /efly check <player>");
+                        }
+
+                } else if (args[0].equalsIgnoreCase("everyone")) {
+                        if (args.length == 2 || args.length == 3) {
+                            if (args[1].equalsIgnoreCase("on") || args[1].equalsIgnoreCase("off")) {
+                                if (args[1].equalsIgnoreCase("on")) {
+                                    if (args.length == 3) {
+                                        String timeString = args[2];
+                                        if (timeString.matches("\\d+([smhd]|seconds?|minutes?|hours?|days?)")) {
+                                            long duration = Utils.calculateDuration(timeString);
+                                            for (Player target : Bukkit.getOnlinePlayers()) {
+                                                TempFlyUtils tempFlyUtils = new TempFlyUtils(plugin);
+                                                tempFlyUtils.addTempFly(target, duration);
+                                            }
+                                        } else {
+                                            sender.sendMessage("§cTime format: <amount><s|m|h|d>");
+                                            sender.sendMessage("§cExample: 40m (Forty minutes)");
+                                            return true;
+                                        }
+                                    } else {
+                                        for (Player target : Bukkit.getOnlinePlayers()) {
+                                            FlyUtils.turnOnFly(target);
+                                        }
+                                        sender.sendMessage(Utils.getTurnOnEveryoneMessage());
+                                    }
+                                    sender.sendMessage(Utils.getTurnOnEveryoneMessage());
+                                } else if (args[1].equalsIgnoreCase("off")) {
+                                    for (Player target : Bukkit.getOnlinePlayers()) {
+                                        FlyUtils.turnOffFly(target);
+                                    }
+                                    sender.sendMessage(Utils.getTurnOffEveryoneMessage());
+                                }
+                            } else {
+                                sender.sendMessage("§cUsage: /efly everyone on|off [time]");
+                            }
+                        } else {
+                            sender.sendMessage("§cUsage: /efly everyone on|off [time]");
+                        }
                 } else {
                     System.out.println("This command either doesn't exist or it is only executable by a player");
                 }
