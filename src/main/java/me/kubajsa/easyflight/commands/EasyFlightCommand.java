@@ -144,7 +144,7 @@ public class EasyFlightCommand implements CommandExecutor {
                         if (args.length >= 2) {
                             FlyUtils.checkFly(args[1], sender);
                         } else {
-                            sender.sendMessage("§cUsage: /efly check <player>");
+                            Log.log(Log.LogLevel.DEFAULT,"§cUsage: /efly check <player>");
                         }
 
                 } else if (args[0].equalsIgnoreCase("everyone")) {
@@ -160,31 +160,31 @@ public class EasyFlightCommand implements CommandExecutor {
                                                 tempFlyUtils.addTempFly(target, duration);
                                             }
                                         } else {
-                                            sender.sendMessage("§cTime format: <amount><s|m|h|d>");
-                                            sender.sendMessage("§cExample: 40m (Forty minutes)");
+                                            Log.log(Log.LogLevel.DEFAULT,"§cTime format: <amount><s|m|h|d>");
+                                            Log.log(Log.LogLevel.DEFAULT,"§cExample: 40m (Forty minutes)");
                                             return true;
                                         }
                                     } else {
                                         for (Player target : Bukkit.getOnlinePlayers()) {
                                             FlyUtils.turnOnFly(target);
                                         }
-                                        sender.sendMessage(Utils.getTurnOnEveryoneMessage());
+                                        Log.log(Log.LogLevel.DEFAULT, Utils.getTurnOnEveryoneMessage());
                                     }
-                                    sender.sendMessage(Utils.getTurnOnEveryoneMessage());
+                                    Log.log(Log.LogLevel.DEFAULT, Utils.getTurnOnEveryoneMessage());
                                 } else if (args[1].equalsIgnoreCase("off")) {
                                     for (Player target : Bukkit.getOnlinePlayers()) {
                                         FlyUtils.turnOffFly(target);
                                     }
-                                    sender.sendMessage(Utils.getTurnOffEveryoneMessage());
+                                    Log.log(Log.LogLevel.DEFAULT, Utils.getTurnOffEveryoneMessage());
                                 }
                             } else {
-                                sender.sendMessage("§cUsage: /efly everyone on|off [time]");
+                                Log.log(Log.LogLevel.DEFAULT,"§cUsage: /efly everyone on|off [time]");
                             }
                         } else {
-                            sender.sendMessage("§cUsage: /efly everyone on|off [time]");
+                            Log.log(Log.LogLevel.DEFAULT,"§cUsage: /efly everyone on|off [time]");
                         }
                 } else {
-                    System.out.println("This command either doesn't exist or it is only executable by a player");
+                    Log.log(Log.LogLevel.DEFAULT,"This command either doesn't exist or it is only executable by a player");
                 }
 
             } else {

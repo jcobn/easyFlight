@@ -39,10 +39,19 @@ public class FlyUtils {
     }
 
     public static void reload(CommandSender sender) {
-        sender.sendMessage("§bReloading config...");
-        plugin.reloadConfig();
-        sender.sendMessage(" ");
-        sender.sendMessage("§bConfig reloaded!");
+        if (sender instanceof Player){
+            Player player = (Player) sender;
+            player.sendMessage("§bReloading config...");
+            plugin.reloadConfig();
+            player.sendMessage(" ");
+            player.sendMessage("§bConfig reloaded!");
+        }
+        else {
+            Log.log(Log.LogLevel.DEFAULT, "§bReloading config...");
+            plugin.reloadConfig();
+            Log.log(Log.LogLevel.DEFAULT, " ");
+            Log.log(Log.LogLevel.SUCCESS, "§bConfig Reloaded!");
+        }
     }
 
     public static void checkFly(String name, CommandSender sender) {
