@@ -49,14 +49,14 @@ public class FlyCommand implements CommandExecutor {
                 Player target = Bukkit.getPlayer(args[0]);
                 if (target != null) {
                     FlyUtils.toggleFly(target);
-                    Log.log(Log.LogLevel.SUCCESS, "You have toggled flight for " + target.getName());
+                    Log.log(Log.LogLevel.SUCCESS, "§bYou have toggled flight for §a" + target.getName());
                 } else {
-                    Log.log(Log.LogLevel.ERROR, "Couldn't find that player");
+                    Log.log(Log.LogLevel.ERROR, "§cCouldn't find that player");
                 }
             } else if (args.length == 2) {
                 Player target = Bukkit.getPlayer(args[0]);
                 if (target == null) {
-                    Log.log(Log.LogLevel.ERROR, "Couldn't find that player");
+                    Log.log(Log.LogLevel.ERROR, "§cCouldn't find that player");
                     return true;
                 }
                 String timeString = args[1];
@@ -67,13 +67,13 @@ public class FlyCommand implements CommandExecutor {
                     TempFlyUtils tempFlyUtils = new TempFlyUtils(plugin);
                     tempFlyUtils.addTempFly(target, duration);
                 } else {
-                    Log.log(Log.LogLevel.INFO, "§cTime format: <amount><s|m|h|d>");
-                    Log.log(Log.LogLevel.INFO, "§cExample: 40m (Forty minutes)");
+                    Log.log(Log.LogLevel.ERROR, "§cTime format: <amount><s|m|h|d>");
+                    Log.log(Log.LogLevel.ERROR, "§cExample: 40m (Forty minutes)");
                 }
 
             }
         } else {
-            Log.log(Log.LogLevel.ERROR, "Usage: fly <player> [time]");
+            Log.log(Log.LogLevel.ERROR, "§cUsage: fly <player> [time]");
         }
         return true;
     }

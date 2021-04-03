@@ -84,6 +84,7 @@ public class EasyFlightCommand implements CommandExecutor {
                                             TempFlyUtils tempFlyUtils = new TempFlyUtils(plugin);
                                             tempFlyUtils.addTempFly(target, duration);
                                         }
+                                        player.sendMessage(Utils.getTurnOnEveryoneMessage());
 
                                     } else {
                                         player.sendMessage("§cTime format: <amount><s|m|h|d>");
@@ -96,8 +97,7 @@ public class EasyFlightCommand implements CommandExecutor {
                                     }
                                     player.sendMessage(Utils.getTurnOnEveryoneMessage());
                                 }
-
-                                player.sendMessage(Utils.getTurnOnEveryoneMessage());
+                                Log.log(Log.LogLevel.SUCCESS, Utils.getTurnOnEveryoneMessage());
                             } else if (args[1].equalsIgnoreCase("off")) {
                                 for (Player target : Bukkit.getOnlinePlayers()) {
                                     FlyUtils.turnOffFly(target);
@@ -123,73 +123,73 @@ public class EasyFlightCommand implements CommandExecutor {
             if (args.length != 0) {
 
                 if (args[0].equalsIgnoreCase("help")) {
-                    Log.log(Log.LogLevel.DEFAULT, "-------------------------");
-                    Log.log(Log.LogLevel.DEFAULT, "Commands:");
-                    Log.log(Log.LogLevel.DEFAULT, "/fly - Toggle flight for yourself");
-                    Log.log(Log.LogLevel.DEFAULT, "/fly <player> [time] - Toggle flight for others");
-                    Log.log(Log.LogLevel.DEFAULT, "/efly help - Shows this message");
-                    Log.log(Log.LogLevel.DEFAULT, "/efly check <player> - See if someone's flying");
-                    Log.log(Log.LogLevel.DEFAULT, "/efly reload - Reload the config");
-                    Log.log(Log.LogLevel.DEFAULT, "/efly everyone <on|off> [time] - Turn on/off flight of everyone");
-                    Log.log(Log.LogLevel.DEFAULT, "Permissions:");
-                    Log.log(Log.LogLevel.DEFAULT, "easyflight.fly - /fly");
-                    Log.log(Log.LogLevel.DEFAULT, "easyflight.fly.others - /fly <player>");
-                    Log.log(Log.LogLevel.DEFAULT, "easyflight.check - /efly check <player>");
-                    Log.log(Log.LogLevel.DEFAULT, "easyflight.reload - /efly reload");
-                    Log.log(Log.LogLevel.DEFAULT, "easyflight.everyone - /efly everyone on|off");
-                    Log.log(Log.LogLevel.DEFAULT, "-------------------------");
+                    Log.log(Log.LogLevel.DEFAULT, "§a-------------------------");
+                    Log.log(Log.LogLevel.DEFAULT, "§bCommands:");
+                    Log.log(Log.LogLevel.DEFAULT, "§b/fly - Toggle flight for yourself");
+                    Log.log(Log.LogLevel.DEFAULT, "§b/fly <player> [time] - Toggle flight for others");
+                    Log.log(Log.LogLevel.DEFAULT, "§b/efly help - Shows this message");
+                    Log.log(Log.LogLevel.DEFAULT, "§b/efly check <player> - See if someone's flying");
+                    Log.log(Log.LogLevel.DEFAULT, "§b/efly reload - Reload the config");
+                    Log.log(Log.LogLevel.DEFAULT, "§b/efly everyone <on|off> [time] - Turn on/off flight of everyone");
+                    Log.log(Log.LogLevel.DEFAULT, "§bPermissions:");
+                    Log.log(Log.LogLevel.DEFAULT, "§beasyflight.fly - /fly");
+                    Log.log(Log.LogLevel.DEFAULT, "§beasyflight.fly.others - /fly <player>");
+                    Log.log(Log.LogLevel.DEFAULT, "§beasyflight.check - /efly check <player>");
+                    Log.log(Log.LogLevel.DEFAULT, "§beasyflight.reload - /efly reload");
+                    Log.log(Log.LogLevel.DEFAULT, "§beasyflight.everyone - /efly everyone on|off");
+                    Log.log(Log.LogLevel.DEFAULT, "§a-------------------------");
                 } else if (args[0].equalsIgnoreCase("reload")) {
-                        FlyUtils.reload(sender);
-                    } else if (args[0].equalsIgnoreCase("check")) {
-                        if (args.length >= 2) {
-                            FlyUtils.checkFly(args[1], sender);
-                        } else {
-                            Log.log(Log.LogLevel.DEFAULT,"§cUsage: /efly check <player>");
-                        }
+                    FlyUtils.reload(sender);
+                } else if (args[0].equalsIgnoreCase("check")) {
+                    if (args.length >= 2) {
+                        FlyUtils.checkFly(args[1], sender);
+                    } else {
+                        Log.log(Log.LogLevel.ERROR, "§cUsage: /efly check <player>");
+                    }
 
                 } else if (args[0].equalsIgnoreCase("everyone")) {
-                        if (args.length == 2 || args.length == 3) {
-                            if (args[1].equalsIgnoreCase("on") || args[1].equalsIgnoreCase("off")) {
-                                if (args[1].equalsIgnoreCase("on")) {
-                                    if (args.length == 3) {
-                                        String timeString = args[2];
-                                        if (timeString.matches("\\d+([smhd]|seconds?|minutes?|hours?|days?)")) {
-                                            long duration = Utils.calculateDuration(timeString);
-                                            for (Player target : Bukkit.getOnlinePlayers()) {
-                                                TempFlyUtils tempFlyUtils = new TempFlyUtils(plugin);
-                                                tempFlyUtils.addTempFly(target, duration);
-                                            }
-                                        } else {
-                                            Log.log(Log.LogLevel.DEFAULT,"§cTime format: <amount><s|m|h|d>");
-                                            Log.log(Log.LogLevel.DEFAULT,"§cExample: 40m (Forty minutes)");
-                                            return true;
-                                        }
-                                    } else {
+                    if (args.length == 2 || args.length == 3) {
+                        if (args[1].equalsIgnoreCase("on") || args[1].equalsIgnoreCase("off")) {
+                            if (args[1].equalsIgnoreCase("on")) {
+                                if (args.length == 3) {
+                                    String timeString = args[2];
+                                    if (timeString.matches("\\d+([smhd]|seconds?|minutes?|hours?|days?)")) {
+                                        long duration = Utils.calculateDuration(timeString);
                                         for (Player target : Bukkit.getOnlinePlayers()) {
-                                            FlyUtils.turnOnFly(target);
+                                            TempFlyUtils tempFlyUtils = new TempFlyUtils(plugin);
+                                            tempFlyUtils.addTempFly(target, duration);
                                         }
-                                        Log.log(Log.LogLevel.DEFAULT, Utils.getTurnOnEveryoneMessage());
+                                        Log.log(Log.LogLevel.SUCCESS, Utils.getTurnOnEveryoneMessage());
+                                    } else {
+                                        Log.log(Log.LogLevel.ERROR, "§cTime format: <amount><s|m|h|d>");
+                                        Log.log(Log.LogLevel.ERROR, "§cExample: 40m (Forty minutes)");
+                                        return true;
                                     }
-                                    Log.log(Log.LogLevel.DEFAULT, Utils.getTurnOnEveryoneMessage());
-                                } else if (args[1].equalsIgnoreCase("off")) {
+                                } else {
                                     for (Player target : Bukkit.getOnlinePlayers()) {
-                                        FlyUtils.turnOffFly(target);
+                                        FlyUtils.turnOnFly(target);
                                     }
-                                    Log.log(Log.LogLevel.DEFAULT, Utils.getTurnOffEveryoneMessage());
+                                    Log.log(Log.LogLevel.SUCCESS, Utils.getTurnOnEveryoneMessage());
                                 }
-                            } else {
-                                Log.log(Log.LogLevel.DEFAULT,"§cUsage: /efly everyone on|off [time]");
+                            } else if (args[1].equalsIgnoreCase("off")) {
+                                for (Player target : Bukkit.getOnlinePlayers()) {
+                                    FlyUtils.turnOffFly(target);
+                                }
+                                Log.log(Log.LogLevel.SUCCESS, Utils.getTurnOffEveryoneMessage());
                             }
                         } else {
-                            Log.log(Log.LogLevel.DEFAULT,"§cUsage: /efly everyone on|off [time]");
+                            Log.log(Log.LogLevel.ERROR, "§cUsage: /efly everyone on|off [time]");
                         }
+                    } else {
+                        Log.log(Log.LogLevel.ERROR, "§cUsage: /efly everyone on|off [time]");
+                    }
                 } else {
-                    Log.log(Log.LogLevel.DEFAULT,"This command either doesn't exist or it is only executable by a player");
+                    Log.log(Log.LogLevel.ERROR, "§cThis command either doesn't exist or it is only executable by a player");
                 }
 
             } else {
-                Log.log(Log.LogLevel.DEFAULT, "Running EasyFlight Version: " + EasyFlight.VERSION);
-                Log.log(Log.LogLevel.DEFAULT, "Type /efly help for help");
+                Log.log(Log.LogLevel.INFO, "§bRunning §aEasyFlight §bVersion: §a" + EasyFlight.VERSION);
+                Log.log(Log.LogLevel.INFO, "§bType /efly help for help");
             }
         }
 

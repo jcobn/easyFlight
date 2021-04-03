@@ -5,6 +5,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.logging.Logger;
+
 public class FlyUtils {
 
     static EasyFlight plugin;
@@ -16,7 +18,7 @@ public class FlyUtils {
 
     public static void toggleFly(Player player) {
         boolean getAllowFlight = player.getAllowFlight();
-        if (getAllowFlight == false) {
+        if (!getAllowFlight) {
             player.setAllowFlight(true);
             player.setFlying(true);
         } else {
@@ -39,17 +41,15 @@ public class FlyUtils {
     }
 
     public static void reload(CommandSender sender) {
-        if (sender instanceof Player){
+        if (sender instanceof Player) {
             Player player = (Player) sender;
             player.sendMessage("§bReloading config...");
             plugin.reloadConfig();
             player.sendMessage(" ");
             player.sendMessage("§bConfig reloaded!");
-        }
-        else {
-            Log.log(Log.LogLevel.DEFAULT, "§bReloading config...");
+        } else {
+            Log.log(Log.LogLevel.INFO, "§bReloading config...");
             plugin.reloadConfig();
-            Log.log(Log.LogLevel.DEFAULT, " ");
             Log.log(Log.LogLevel.SUCCESS, "§bConfig Reloaded!");
         }
     }
@@ -57,14 +57,24 @@ public class FlyUtils {
     public static void checkFly(String name, CommandSender sender) {
         Player target = Bukkit.getPlayer(name);
         if (target == null) {
-            sender.sendMessage("§cUsage: /efly check <player>");
+            if (sender instanceof Player) {
+                sender.sendMessage("§cUsage: /efly check <player>");
+            } else Log.log(Log.LogLevel.ERROR, "Usage: /efly check <player>");
+
         } else {
             boolean isAllowed = target.getAllowFlight();
             boolean isFlying = target.isFlying();
             String one = "§bIs §a" + target.getName() + " §ballowed to fly? §a" + isAllowed;
             String two = "§bIs §a" + target.getName() + " §bflying? §a" + isFlying;
-            sender.sendMessage(one.replace("true", "Yes").replace("false", "No"));
-            sender.sendMessage(two.replace("true", "Yes").replace("false", "No"));
+
+            if (sender instanceof Player) {
+                sender.sendMessage(one.replace("true", "Yes").replace("false", "No"));
+                sender.sendMessage(two.replace("true", "Yes").replace("false", "No"));
+            } else {
+                Log.log(Log.LogLevel.INFO, one.replace("true", "Yes").replace("false", "No"));
+                Log.log(Log.LogLevel.INFO, two.replace("true", "Yes").replace("false", "No"));
+            }
+
         }
     }
 }
