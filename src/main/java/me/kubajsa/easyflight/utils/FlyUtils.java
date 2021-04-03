@@ -2,6 +2,7 @@ package me.kubajsa.easyflight.utils;
 
 import me.kubajsa.easyflight.EasyFlight;
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class FlyUtils {
@@ -37,24 +38,33 @@ public class FlyUtils {
         player.sendMessage(Utils.getTurnOffMessage(player));
     }
 
-    public static void reload(Player player) {
-        player.sendMessage("§bReloading config...");
-        plugin.reloadConfig();
-        player.sendMessage(" ");
-        player.sendMessage("§bConfig reloaded!");
+    public static void reload(CommandSender sender) {
+        if (sender instanceof Player){
+            Player player = (Player) sender;
+            player.sendMessage("§bReloading config...");
+            plugin.reloadConfig();
+            player.sendMessage(" ");
+            player.sendMessage("§bConfig reloaded!");
+        }
+        else {
+            Log.log(Log.LogLevel.DEFAULT, "§bReloading config...");
+            plugin.reloadConfig();
+            Log.log(Log.LogLevel.DEFAULT, " ");
+            Log.log(Log.LogLevel.SUCCESS, "§bConfig Reloaded!");
+        }
     }
 
-    public static void checkFly(String name, Player player) {
+    public static void checkFly(String name, CommandSender sender) {
         Player target = Bukkit.getPlayer(name);
         if (target == null) {
-            player.sendMessage("§cUsage: /efly check <player>");
+            sender.sendMessage("§cUsage: /efly check <player>");
         } else {
             boolean isAllowed = target.getAllowFlight();
             boolean isFlying = target.isFlying();
             String one = "§bIs §a" + target.getName() + " §ballowed to fly? §a" + isAllowed;
             String two = "§bIs §a" + target.getName() + " §bflying? §a" + isFlying;
-            player.sendMessage(one.replace("true", "Yes").replace("false", "No"));
-            player.sendMessage(two.replace("true", "Yes").replace("false", "No"));
+            sender.sendMessage(one.replace("true", "Yes").replace("false", "No"));
+            sender.sendMessage(two.replace("true", "Yes").replace("false", "No"));
         }
     }
 }
